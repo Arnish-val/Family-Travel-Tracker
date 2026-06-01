@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+
+# Sensitive environment variables
+.env
+
+# Exclude other solution files
+solution1.js
+solution2.js
+solution3.js
+solution4.js
