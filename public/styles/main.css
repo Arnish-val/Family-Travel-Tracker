@@ -1,104 +1,252 @@
+/* Core Styles & Design System */
+:root {
+  --bg-primary: hsl(222, 47%, 11%);
+  --bg-card: hsla(217, 33%, 17%, 0.65);
+  --border-color: hsla(217, 32%, 80%, 0.08);
+  --text-main: hsl(210, 38%, 95%);
+  --text-muted: hsl(215, 20%, 65%);
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --color-error: hsl(0, 84%, 60%);
+}
+
 html {
   box-sizing: border-box;
 }
+
 *,
 *:before,
 *:after {
   box-sizing: inherit;
 }
+
 html,
 body {
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
+
 body {
-  background: #21252b;
-
-  color: #d3ddef;
-}
-
-.ag-canvas {
-  display: -webkit-flex;
-  display: -ms-flexbox;
+  background: var(--bg-primary);
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 0.3) 0, transparent 50%);
+  color: var(--text-main);
+  font-family: var(--font-body);
   display: flex;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
+  flex-direction: column;
   align-items: center;
-
-  position: relative;
-  visibility: visible;
-
-  width: 100%;
-  height: 100%;
-  padding: 3rem 1rem;
-  opacity: 1;
-  transition: opacity 0.5s;
-
-  z-index: -1;
-  margin-top: -90px;
+  overflow-x: hidden;
 }
+
+/* Glassmorphism Container */
+.glass-container {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 2.5rem;
+  width: 90%;
+  max-width: 900px;
+  margin: 2rem auto 1rem auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  z-index: 10;
+}
+
+/* App Header styling */
+.app-header {
+  text-align: center;
+}
+
+.app-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2.5rem;
+  margin: 0 0 0.5rem 0;
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.app-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Tab View / User Selection styling */
+.tab-view {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.tab-btn {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: hsla(217, 33%, 25%, 0.3);
+  border: 1px solid var(--border-color);
+  border-radius: 30px;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition-smooth);
+}
+
+.tab-btn:hover {
+  background: hsla(217, 33%, 25%, 0.6);
+  color: var(--text-main);
+  transform: translateY(-2px);
+}
+
+.tab-btn.active {
+  background: var(--user-color);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 15px var(--user-color);
+}
+
+.color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.tab-btn.active .color-dot {
+  background-color: #ffffff !important;
+}
+
+/* Add Member Tab styling */
+.add-btn {
+  background: transparent;
+  border: 1px dashed #60a5fa;
+  color: #60a5fa;
+}
+
+.add-btn:hover {
+  background: #60a5fa;
+  color: var(--bg-primary);
+  border-color: transparent;
+}
+
+.plus-icon {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* Search Form styling */
+.search-form {
+  width: 100%;
+  max-width: 500px;
+}
+
+.input-group {
+  display: flex;
+  background: hsla(217, 33%, 25%, 0.2);
+  border: 1px solid var(--border-color);
+  border-radius: 30px;
+  padding: 4px;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.input-group:focus-within {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.25);
+}
+
+.search-form input {
+  font-family: var(--font-body);
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--text-main);
+  padding: 10px 15px;
+  flex-grow: 1;
+  font-size: 0.95rem;
+  min-width: 0;
+}
+
+.search-form input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-form input.input-error::placeholder {
+  color: var(--color-error);
+}
+
+.search-form button {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 0;
+  border-radius: 25px;
+  color: #ffffff;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  text-transform: none;
+}
+
+.search-form button:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+/* SVG Canvas / World Map styling */
+.ag-canvas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  max-width: 1100px;
+  margin-top: 1rem;
+  padding: 0 1rem;
+}
+
 .ag-canvas_svg {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 100%;
-  margin-left: 1rem;
+  max-height: 550px;
 }
+
 .ag-canvas_svg path {
-  fill: #383d46;
+  fill: #272d38;
   fill-opacity: 1;
-  stroke: #21252b;
-  stroke-opacity: 1;
-  stroke-width: 0.5;
-  transition: 0.5s;
+  stroke: var(--bg-primary);
+  stroke-opacity: 0.8;
+  stroke-width: 0.6;
+  transition: fill 0.4s ease-in-out, stroke 0.4s ease-in-out;
 }
 
-@media screen and (max-width: 767px) {
-  .ag-canvas {
-    -webkit-flex-flow: row wrap;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-    height: auto;
-    padding: 4rem 1rem 1rem;
-  }
-  .ag-canvas_svg {
-    max-height: calc(100% - 6rem);
-    margin-left: 0;
-  }
-}
-
-input {
-  font-family: "Roboto", sans-serif;
-  outline: 0;
-  background: #f2f2f2;
-  width: 100%;
-  border: 0;
-  margin: 0 0 15px;
-  padding: 15px;
-  box-sizing: border-box;
-  font-size: 14px;
-}
-
-button {
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
-  outline: 0;
-  background: teal;
-  /* float: right;
-  margin-bottom: -100px; */
-  border: 0;
-  padding: 15px;
-  color: #ffffff;
-  font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
+.ag-canvas_svg path:hover {
+  stroke: #60a5fa;
+  stroke-width: 1;
   cursor: pointer;
 }
 
+/* Total Count styling */
 .total-count {
-  font-family: "Roboto", sans-serif;
-  color: white;
-  position: absolute;
-  padding: 15px;
-  left: 0;
-  bottom: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 1.5rem 0 3rem 0;
+  font-size: 1.2rem;
 }

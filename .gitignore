@@ -9,3 +9,12 @@ solution1.js
 solution2.js
 solution3.js
 solution4.js
+
+# Logs and temp files
+*.log
+error.log
+
+# Agent binaries & engine
+.agent/
+.planning/graphs/
+

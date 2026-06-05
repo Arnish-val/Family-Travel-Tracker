@@ -4,28 +4,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Travel Tracker</title>
+  <title>Family Travel Tracker</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles/main.css">
 </head>
 
 <body>
-  <form class="tab-view tab-view-height-auto" action="/user" method="post">
-    <% users.forEach(function(user) { %>
-      <input type="submit" name="user" value="<%= user.id %>" id="<%= user.id %>">
-      <label for="<%= user.id %>" style="background-color: <%= user.color %>;">
-        <%= user.name %>
-      </label>
+  <div class="glass-container">
+    <header class="app-header">
+      <h1 class="app-title">Family Travel Tracker</h1>
+      <p class="app-subtitle">Log and track the places visited by your family members</p>
+    </header>
+
+    <form class="tab-view" action="/user" method="post">
+      <% users.forEach(function(user) { %>
+        <button type="submit" name="user" value="<%= user.id %>" class="tab-btn <%= user.id == currentUserId ? 'active' : '' %>" style="--user-color: <%= user.color %>;">
+          <span class="color-dot" style="background-color: <%= user.color %>;"></span>
+          <%= user.name %>
+        </button>
       <% }); %>
+      <button type="submit" name="add" value="new" class="tab-btn add-btn">
+        <span class="plus-icon">+</span> Add Member
+      </button>
+    </form>
 
-        <input type="submit" name="add" value="new" id="tab">
-        <label for="tab">Add Family Member</label>
-
-  </form>
-
-  <form action="/add" method="post">
-    <input type="text" name="country" autofocus placeholder="<%= locals.error ? error :  'Enter country name'%>">
-    <button type="submit" style="background-color: <%= color %>;">Add</button>
-  </form>
+    <form class="search-form" action="/add" method="post">
+      <div class="input-group">
+        <input type="text" name="country" autofocus placeholder="<%= locals.error ? error : 'Enter country name...' %>" class="<%= locals.error ? 'input-error' : '' %>">
+        <button type="submit" style="background-color: <%= color %>;">Add Country</button>
+      </div>
+    </form>
+  </div>
 
   <section class="ag-canvas">
     <svg class="ag-canvas_svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"

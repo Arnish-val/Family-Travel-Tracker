@@ -43,26 +43,43 @@ async function checkVisisted() {
 async function getCurrentUser() {
   const result = await db.query("SELECT * FROM users");
   users = result.rows;
-  return users.find((user) => user.id == currentUserId);
+  if (users.length === 0) {
+    return null;
+  }
+  let user = users.find((user) => user.id == currentUserId);
+  if (!user) {
+    currentUserId = users[0].id;
+    user = users[0];
+  }
+  return user;
 }
 
 app.get("/", async (req, res) => {
-  const countries = await checkVisisted();
   const currentUser = await getCurrentUser();
+  if (!currentUser) {
+    return res.render("new.ejs");
+  }
+  const countries = await checkVisisted();
   res.render("index.ejs", {
     countries: countries,
     total: countries.length,
     users: users,
     color: currentUser.color,
+    currentUserId: currentUserId,
   });
 });
+
 app.post("/add", async (req, res) => {
   const input = req.body["country"];
   const currentUser = await getCurrentUser();
 
+  if (!currentUser) {
+    return res.redirect("/");
+  }
+
   try {
     const result = await db.query(
-      "SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%' || $1 || '%';",
+      "SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%' || $1 || '%' ORDER BY LENGTH(country_name) ASC LIMIT 1;",
       [input.toLowerCase()]
     );
 
