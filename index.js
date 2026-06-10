@@ -30,7 +30,7 @@ let users = [
 
 async function checkVisisted() {
   const result = await db.query(
-    "SELECT country_code FROM visited_countries JOIN users ON users.id = user_id WHERE user_id = $1; ",
+    "SELECT country_code FROM visited_countries JOIN users ON users.id = user_id WHERE user_id = $1 ORDER BY visited_countries.id ASC; ",
     [currentUserId]
   );
   let countries = [];
