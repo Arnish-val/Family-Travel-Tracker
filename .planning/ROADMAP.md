@@ -8,6 +8,7 @@ This roadmap covers the refactoring of the Travel Tracker project to add a bette
 
 - [x] **Phase 1: Database and Backend Structure** - Implement robust user management and clean PG queries. (completed 2026-06-05)
 - [x] **Phase 2: Modern Responsive UI & Visual Map** - Implement premium Vanilla CSS UI and interactive user tab selectors. (completed 2026-06-05)
+- [ ] **Phase 3: Multipage Travel Tracker & Premium Booking UI** - Refactor to multipage app, add Dribbble-inspired landing page, scroll animations, and clean routing.
 
 ## Phase Details
 
@@ -45,9 +46,28 @@ Plans:
 
 - [ ] 02-01: Redesign index.ejs view and styles/main.css for premium UI/UX.
 
+### Phase 3: Multipage Travel Tracker & Premium Booking UI
+
+**Goal**: Refactor to multipage app structure, add landing page with search/booking card, scroll animations, and clean routing.
+**Depends on**: Phase 2
+**Requirements**: [REQ-03]
+**Success Criteria** (what must be TRUE):
+
+  1. Floating navigation header is sticky and allows navigating between Home, Tracker, and Add Traveler.
+  2. Landing page renders a premium booking search widget to query traveler logs and displays elements using scroll-reveal transitions.
+  3. Tracker view operates correctly at `/tracker`, rendering map paths and timeline logs dynamically.
+  4. Adding travelers and stops functions seamlessly with clean redirects.
+
+**Plans**: 1 plan
+
+Plans:
+
+- [ ] 03-01: Implement Express REST API, initialize Vite React app, build components (BookingSearchCard, WorldMap, Timeline), and configure client routing/scroll animations.
+
 ## Progress
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Database and Backend Structure | 0/0 | Complete    | 2026-06-05 |
 | 2. Modern Responsive UI & Visual Map | 0/0 | Complete    | 2026-06-05 |
+| 3. Multipage Travel Tracker & Premium Booking UI | 0/1 | Planning | - |
