@@ -35,6 +35,17 @@ app.use((req, res, next) => {
 
 // ─── API ROUTES ──────────────────────────────────────────────
 
+// Reset database (truncate tables)
+app.post("/api/reset", async (req, res) => {
+  try {
+    await db.query("TRUNCATE TABLE visited_countries, users RESTART IDENTITY CASCADE;");
+    res.json({ success: true, message: "Database reset successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to reset database" });
+  }
+});
+
 // Get all users
 app.get("/api/users", async (req, res) => {
   try {

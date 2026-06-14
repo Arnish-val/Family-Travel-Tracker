@@ -14,6 +14,22 @@ export default function Navbar() {
 
   const isActive = (path) => location.pathname === path
 
+  const handleResetDB = async () => {
+    if (!window.confirm("Are you sure you want to reset the database? This will delete all travelers and visited countries!")) {
+      return
+    }
+    try {
+      const res = await fetch('/api/reset', { method: 'POST' })
+      if (res.ok) {
+        window.location.href = '/'
+      } else {
+        alert("Failed to reset database.")
+      }
+    } catch (e) {
+      alert("Error resetting database.")
+    }
+  }
+
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <Link to="/" className="navbar-brand">
@@ -32,6 +48,9 @@ export default function Navbar() {
           <Map size={16} />
           My Travels
         </Link>
+        <button onClick={handleResetDB} className="navbar-link" style={{ color: 'var(--color-error)' }}>
+          Reset DB
+        </button>
         <Link to="/add-traveler" className="navbar-cta">
           <UserPlus size={16} style={{ marginRight: 4 }} />
           Add Traveler
